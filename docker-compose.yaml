@@ -13,11 +13,26 @@ services:
     volumes:
       - ${COMMON_PATH}:${COMMON_PATH}
       - ${COMMON_PATH}/configs/qbittorrent:/config
-      - ${COMMON_PATH}/qbittorrent/downloads:/downloads
+      - ${MEDIA_PATH}/qbittorrent/downloads:/downloads
     ports:
       - 8080:8080
       - 6881:6881
       - 6881:6881/udp
+    restart: unless-stopped
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=${TZ}
+    volumes:
+      - ${COMMON_PATH}:${COMMON_PATH}
+      - ${COMMON_PATH}/configs/sabnzbd:/config
+      - ${MEDIA_PATH}/sabnzbd/downloads:/downloads
+    ports:
+      - 8081:8080
+      - 9090:9090
     restart: unless-stopped
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -66,8 +81,8 @@ services:
     volumes:
       - ${COMMON_PATH}:${COMMON_PATH}
       - ${COMMON_PATH}/configs/sonarr:/config
-      - ${COMMON_PATH}/sonarr/tv:/tv
-      - ${COMMON_PATH}/qbittorrent/downloads:/downloads
+      - ${MEDIA_PATH}/sonarr/tv:/tv
+      - ${MEDIA_PATH}/qbittorrent/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -81,8 +96,8 @@ services:
     volumes:
       - ${COMMON_PATH}:${COMMON_PATH}
       - ${COMMON_PATH}/configs/radarr:/config
-      - ${COMMON_PATH}/radarr/movies:/movies
-      - ${COMMON_PATH}/qbittorrent/downloads:/downloads
+      - ${MEDIA_PATH}/radarr/movies:/movies
+      - ${MEDIA_PATH}/qbittorrent/downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -103,9 +118,9 @@ services:
       - ${COMMON_PATH}:${COMMON_PATH}
       - ${COMMON_PATH}/configs/jellyfin:/config
       - ${COMMON_PATH}/jellyfin/cache:/cache
-      - ${COMMON_PATH}/sonarr/tv:/data/tvshows
-      - ${COMMON_PATH}/radarr/movies:/data/movies
-      - ${COMMON_PATH}/qbittorrent/downloads:/data/media_downloads
+      - ${MEDIA_PATH}/sonarr/tv:/data/tvshows
+      - ${MEDIA_PATH}/radarr/movies:/data/movies
+      - ${MEDIA_PATH}/qbittorrent/downloads:/data/media_downloads
     restart: unless-stopped
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
