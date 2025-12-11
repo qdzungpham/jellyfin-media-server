@@ -42,6 +42,8 @@ services:
       - 8080:8080
       - 9090:9090
     restart: unless-stopped
+    networks:
+      - proxy
     # No Traefik routing for sabnzbd
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -56,6 +58,8 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    networks:
+      - proxy
     # No Traefik routing for sonarr
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -70,6 +74,8 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+    networks:
+      - proxy
     # No Traefik routing for radarr
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -83,6 +89,8 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
+    networks:
+      - proxy
     # No Traefik routing for prowlarr
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -98,6 +106,8 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
+    networks:
+      - proxy
     # No Traefik routing for bazarr
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
