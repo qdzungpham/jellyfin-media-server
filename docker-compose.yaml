@@ -157,6 +157,21 @@ services:
       - traefik.http.routers.jellyseerr.tls=true
       - traefik.http.routers.jellyseerr.tls.certresolver=le
       - traefik.http.services.jellyseerr.loadbalancer.server.port=5055
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${APPDATA_PATH}/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    networks:
+      - proxy
+    # No Traefik routing for homepage
 
 networks:
   proxy:
