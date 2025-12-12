@@ -167,6 +167,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=${TZ}
+      - HOMEPAGE_ALLOWED_HOSTS=* # Allow all hosts. Adjust as needed for security.
     volumes:
       - ${APPDATA_PATH}/homepage:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -176,6 +178,19 @@ services:
     networks:
       - proxy
     # No Traefik routing for homepage
+  ddclient:
+    image: linuxserver/ddclient:latest
+    container_name: ddclient
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ${APPDATA_PATH}/ddclient:/config
+    restart: unless-stopped
+    networks:
+      - proxy
+    # No Traefik routing for ddclient
 
 networks:
   proxy:
