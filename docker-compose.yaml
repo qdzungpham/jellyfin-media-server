@@ -126,6 +126,10 @@ services:
       - ${APPDATA_PATH}/jellyfin:/config
       - ${DATA_ROOT_PATH}/data/media:/data/media
     restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - 992 # Replace with the appropriate render group ID for your system
     networks:
       - proxy
     labels:
