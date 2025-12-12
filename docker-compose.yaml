@@ -129,7 +129,7 @@ services:
     devices:
       - /dev/dri:/dev/dri
     group_add:
-      - 992 # Replace with the appropriate render group ID for your system
+      - "992" # Replace with the appropriate render group ID for your system
     networks:
       - proxy
     labels:
