@@ -165,8 +165,6 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=${TZ}
       - HOMEPAGE_ALLOWED_HOSTS=* # Allow all hosts. Adjust as needed for security.
     volumes:
