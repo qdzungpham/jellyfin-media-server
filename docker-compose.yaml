@@ -187,6 +187,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${APPDATA_PATH}/ddclient:/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     dns:
       - 1.1.1.1
       - 8.8.8.8
