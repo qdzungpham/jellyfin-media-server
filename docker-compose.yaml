@@ -176,23 +176,23 @@ services:
     networks:
       - proxy
     # No Traefik routing for homepage
-  ddclient:
-    image: linuxserver/ddclient:latest
-    container_name: ddclient
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TZ}
-    volumes:
-      - ${APPDATA_PATH}/ddclient:/config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    dns:
-      - 1.1.1.1
-      - 8.8.8.8
-    restart: unless-stopped
-    networks:
-      - proxy
-    # No Traefik routing for ddclient
+  # ddclient:
+  #   image: linuxserver/ddclient:latest
+  #   container_name: ddclient
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=${TZ}
+  #   volumes:
+  #     - ${APPDATA_PATH}/ddclient:/config
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   dns:
+  #     - 1.1.1.1
+  #     - 8.8.8.8
+  #   restart: unless-stopped
+  #   networks:
+  #     - proxy
+  #   # No Traefik routing for ddclient
 
 networks:
   proxy:
