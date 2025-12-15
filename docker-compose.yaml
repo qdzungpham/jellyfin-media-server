@@ -102,7 +102,7 @@ services:
       - ${APPDATA_PATH}/jellyseerr:/app/config
     restart: unless-stopped
   glances:
-    image: lscr.io/linuxserver/glances:latest
+    image: nicolargo/glances:latest-full
     container_name: glances
     environment:
       - TZ=${TZ}
