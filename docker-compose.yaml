@@ -101,6 +101,18 @@ services:
     volumes:
       - ${APPDATA_PATH}/jellyseerr:/app/config
     restart: unless-stopped
+  glances:
+    image: lscr.io/linuxserver/glances:latest
+    container_name: glances
+    environment:
+      - TZ=${TZ}
+      - GLANCES_OPT=-w
+    volumes:
+      - ${APPDATA_PATH}/glances:/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 61208:61208
+    restart: unless-stopped
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage

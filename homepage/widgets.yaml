@@ -1,5 +1,8 @@
 ---
-- resources:
+- glances:
+    url: http://glances:61208
     cpu: true
     memory: true
     disk: /
+    gpu: true
+    network: true
