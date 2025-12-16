@@ -15,6 +15,36 @@ services:
       - 8080:8080
       - 9090:9090
     restart: unless-stopped
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - WEBUI_PORT=8080
+      - PUID=0
+      - PGID=0
+      - TZ=${TZ}
+      # - DOCKER_MODS=ghcr.io/gabe565/linuxserver-mod-vuetorrent
+    volumes:
+      - ${APPDATA_PATH}/qbittorrent:/config
+      - ${DATA_ROOT_PATH}/data/torrents:/downloads
+    ports:
+      - 8081:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=${TZ}
+      #- LANG=fr_FR
+      #- LANG=en_US
+    ports:
+      - 8191:8191
+    restart: unless-stopped
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
