@@ -28,7 +28,7 @@ services:
       - ${APPDATA_PATH}/qbittorrent:/config
       - ${DATA_ROOT_PATH}/data/torrents:/downloads
     ports:
-      - 8081:8080
+      - 8082:8080
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
