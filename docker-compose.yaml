@@ -19,7 +19,7 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - WEBUI_PORT=8081
+      - WEBUI_PORT=8085
       - PUID=0
       - PGID=0
       - TZ=${TZ}
@@ -28,7 +28,7 @@ services:
       - ${APPDATA_PATH}/qbittorrent:/config
       - ${DATA_ROOT_PATH}/data/torrents:/downloads
     ports:
-      - 8081:8081
+      - 8085:8085
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
