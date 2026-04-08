@@ -174,3 +174,35 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - ND_SCANSCHEDULE=1h
+      - ND_LOGLEVEL=info
+      - ND_SESSIONTIMEOUT=24h
+      - ND_BASEURL=""
+    ports:
+      - 4533:4533
+    volumes:
+      - ${APPDATA_PATH}/navidrome:/data
+      - ${DATA_ROOT_PATH}/data/media/music:/music
+    restart: unless-stopped
+  spotdl:
+    image: spotdl/spotify-downloader:latest
+    container_name: spotdl
+    command: web --host 0.0.0.0 --web-use-output-dir
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    ports:
+      - 8800:8800
+    volumes:
+      - ${APPDATA_PATH}/spotdl:/config
+      - ${DATA_ROOT_PATH}/data/media/music:/music
+    restart: unless-stopped
+
