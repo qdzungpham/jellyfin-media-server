@@ -198,10 +198,11 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ}
+      - SPOTIPY_CLIENT_ID=${SPOTIPY_CLIENT_ID}
+      - SPOTIPY_CLIENT_SECRET=${SPOTIPY_CLIENT_SECRET}
     ports:
       - 8800:8800
     volumes:
       - ${APPDATA_PATH}/spotdl:/config
       - ${DATA_ROOT_PATH}/data/media/music:/music
     restart: unless-stopped
-
